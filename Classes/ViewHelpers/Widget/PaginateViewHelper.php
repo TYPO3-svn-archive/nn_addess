@@ -64,7 +64,7 @@ class PaginateViewHelper extends \TYPO3\CMS\Fluid\Core\Widget\AbstractWidgetView
 	 * @param array $configuration
 	 * @return string
 	 */
-	public function render($objects, $as, array $configuration = array('itemsPerPage' => 10, 'insertAbove' => FALSE, 'insertBelow' => TRUE, 'maximumNumberOfLinks' => 99, 'sliceSub' => FALSE)) {
+	public function render($objects, $as, array $configuration = array('itemsPerPage' => 10, 'insertAbove' => FALSE, 'insertBelow' => TRUE, 'maximumNumberOfLinks' => 99, 'addQueryStringMethod' => '', 'sliceSub' => FALSE)) {
 		return $this->initiateSubRequest();
 	}
 }
