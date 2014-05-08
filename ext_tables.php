@@ -210,7 +210,7 @@ if ( $_nnaddress_extConf['enableRealUrl'] == 1 ) {
 			'lookUpTable' => array(
 				'table' => 'tx_nnaddress_domain_model_person',
 				'id_field' => 'uid',
-				'alias_field' => 'last_name,organisation',
+				'alias_field' => 'CONCAT(last_name,\'_\',organisation)',
 				'addWhereClause' => ' AND NOT deleted',
 				'useUniqueCache' => 1,
 				'useUniqueCache_conf' => array(
