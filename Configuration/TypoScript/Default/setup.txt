@@ -126,7 +126,7 @@ lib.nnAddressAssociated {
     
     typolink {
       parameter.data            = TSFE:id
-      additionalParams.dataWrap = &tx_nnaddress_abclist[person]={field:uid}&tx_nnaddress_abclist[controller]=Person
+      additionalParams.dataWrap = &tx_nnaddress_abclist[person]={field:uid}
 	  addQueryString            = 0
     }
   }

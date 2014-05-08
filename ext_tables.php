@@ -189,9 +189,6 @@ $_nnaddress_extConf = unserialize($GLOBALS['TYPO3_CONF_VARS']['EXT']['extConf'][
 if ( $_nnaddress_extConf['enableRealUrl'] == 1 ) {
 	$GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['realurl']['_DEFAULT']['postVarSets']['_DEFAULT']['details'] = array(
 		array(
-			'GETvar' => 'tx_nnaddress_abclist[controller]',
-		),
-		array(
 			'GETvar' => 'tx_nnaddress_abclist[person]',
 			'lookUpTable' => array(
 				'table' => 'tx_nnaddress_domain_model_person',
@@ -208,9 +205,6 @@ if ( $_nnaddress_extConf['enableRealUrl'] == 1 ) {
 	);
 
 	$GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['realurl']['_DEFAULT']['postVarSets']['_DEFAULT']['address'] = array(
-		array(
-			'GETvar' => 'tx_nnaddress_list[controller]',
-		),
 		array(
 			'GETvar' => 'tx_nnaddress_list[person]',
 			'lookUpTable' => array(
