@@ -1,5 +1,13 @@
+#
+## Default styles
+#
 page.includeCSS.tx_nnaddress = EXT:nn_address/Resources/Public/Css/default.css
 
+
+
+#
+## Configuration
+#
 plugin.tx_nnaddress {
 	view {
 		templateRootPath = {$plugin.tx_nnaddress.view.templateRootPath}
@@ -10,6 +18,7 @@ plugin.tx_nnaddress {
 		storagePid = {$plugin.tx_nnaddress.persistence.storagePid}
 	}
 	features {
+		skipDefaultArguments    = 1
 		rewrittenPropertyMapper = 1
 	}
 	settings {
@@ -21,6 +30,20 @@ plugin.tx_nnaddress {
 		TYPO3\CMS\Extbase\Service\ExtensionService.className = NN\NnAddress\Service\ExtensionService
 	}
 }
+
+
+
+#
+## A little trick to make smaller URLs
+#
+[globalVar = GP:tx_nnaddress_abclist|person > 0]
+	config.defaultGetVars.tx_nnaddress_abclist.action = show
+[global]
+[globalVar = GP:tx_nnaddress_list|person > 0]
+	config.defaultGetVars.tx_nnaddress_abclist.action = show
+[global]
+
+
 
 #
 ## Shows a map on each address in single view
@@ -80,4 +103,31 @@ lib.nnAddressMap {
     }
   
 	25 = RESTORE_REGISTER
+}
+
+
+
+#
+## Shows associated Contacts to a Person entry (flexform field)
+#
+lib.nnAddressAssociated = RECORDS
+lib.nnAddressAssociated {
+  tables       = tx_nnaddress_domain_model_person
+  source.field = uidList
+  dontCheckPid = 1
+  
+  wrap = <ul class="associatedPersons">|</ul>
+  
+  conf.tx_nnaddress_domain_model_person = TEXT
+  conf.tx_nnaddress_domain_model_person {
+    value      = {field:title} {field:first_name} {field:last_name}
+    insertData = 1
+    wrap       = <li>|</li> 
+    
+    typolink {
+      parameter.data            = TSFE:id
+      additionalParams.dataWrap = &tx_nnaddress_abclist[person]={field:uid}&tx_nnaddress_abclist[controller]=Person
+	  addQueryString            = 0
+    }
+  }
 }

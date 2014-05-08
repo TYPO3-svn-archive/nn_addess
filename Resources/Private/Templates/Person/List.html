@@ -18,7 +18,7 @@
 	<f:for each="{paginatedPersons}" as="person" iteration="i">
 		<tr class="{f:if(condition: '{i.isEven}', then: 'even', else: 'odd')}">
 			<td>
-              <f:link.action action="show" arguments="{person : person}">
+              <f:link.action arguments="{person : person}">
                 <f:translate key="LLL:EXT:nn_address/Resources/Private/Language/locallang_csh_tx_nnaddress_domain_model_person.xlf:gender.{person.gender}" />
                 {person.title}
                 {person.firstName} {person.lastName}

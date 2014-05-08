@@ -154,6 +154,10 @@
 				<target>Neu laden</target>
 			</trans-unit>
 			
+			<trans-unit id="back">
+				<target><![CDATA[Zurück]]></target>
+			</trans-unit>
+			
 		</body>
 	</file>
 </xliff>

@@ -164,4 +164,11 @@
       </td>
   </tr>
   </f:if>
+  
+  <f:if condition="{person.flexform.associatedPersons}">
+  <tr>
+    <td><f:translate key="LLL:EXT:nn_address/Resources/Private/Language/locallang_db.xlf:tx_nnaddress_flexForm_associated" /></td>
+	<td><f:cObject typoscriptObjectPath="lib.nnAddressAssociated" data="{uidList:'{person.flexform.associatedPersons}'}" /></td>
+  </tr>
+  </f:if>
 </table>
