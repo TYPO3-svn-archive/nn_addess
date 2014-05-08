@@ -40,7 +40,7 @@ plugin.tx_nnaddress {
 	config.defaultGetVars.tx_nnaddress_abclist.action = show
 [global]
 [globalVar = GP:tx_nnaddress_list|person > 0]
-	config.defaultGetVars.tx_nnaddress_abclist.action = show
+	config.defaultGetVars.tx_nnaddress_list.action = show
 [global]
 
 
