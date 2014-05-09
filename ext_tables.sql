@@ -75,6 +75,7 @@ CREATE TABLE tx_nnaddress_domain_model_address (
 	country varchar(255) DEFAULT '' NOT NULL,
 	region varchar(255) DEFAULT '' NOT NULL,
 	website varchar(255) DEFAULT '' NOT NULL,
+	flexform text NOT NULL,
 
 	tstamp int(11) unsigned DEFAULT '0' NOT NULL,
 	crdate int(11) unsigned DEFAULT '0' NOT NULL,
@@ -120,6 +121,7 @@ CREATE TABLE tx_nnaddress_domain_model_phone (
 
 	type int(11) DEFAULT '0' NOT NULL,
 	number varchar(255) DEFAULT '' NOT NULL,
+	flexform text NOT NULL,
 
 	tstamp int(11) unsigned DEFAULT '0' NOT NULL,
 	crdate int(11) unsigned DEFAULT '0' NOT NULL,
@@ -165,6 +167,7 @@ CREATE TABLE tx_nnaddress_domain_model_mail (
 
 	type int(11) DEFAULT '0' NOT NULL,
 	email varchar(255) DEFAULT '' NOT NULL,
+	flexform text NOT NULL,
 
 	tstamp int(11) unsigned DEFAULT '0' NOT NULL,
 	crdate int(11) unsigned DEFAULT '0' NOT NULL,
@@ -206,6 +209,7 @@ CREATE TABLE tx_nnaddress_domain_model_group (
 
 	title varchar(255) DEFAULT '' NOT NULL,
 	description text NOT NULL,
+	flexform text NOT NULL,
 
 	tstamp int(11) unsigned DEFAULT '0' NOT NULL,
 	crdate int(11) unsigned DEFAULT '0' NOT NULL,

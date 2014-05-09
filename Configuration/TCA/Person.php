@@ -288,6 +288,6 @@ $TCA['tx_nnaddress_domain_model_person'] = array(
 );
 
 // Add Flexform if in extManager Conf is set or remove the sheet
-\NN\NnAddress\Utility\Flexform::modifyFlexSheet($TCA);
+\NN\NnAddress\Utility\Flexform::modifyFlexSheet($TCA, 'person');
 
 ?>

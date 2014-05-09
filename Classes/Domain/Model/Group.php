@@ -48,6 +48,13 @@ class Group extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 	 * @var \string
 	 */
 	protected $description;
+	
+	/**
+	 * flexform
+	 *
+	 * @var \string
+	 */
+	protected $flexform;
 
 	/**
 	 * Returns the title
@@ -85,6 +92,20 @@ class Group extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 	 */
 	public function setDescription($description) {
 		$this->description = $description;
+	}
+	
+	/**
+	 * Returns the flexform
+	 *
+	 * @return \array $flexform
+	 */
+	public function getFlexform() {
+		if ( !empty($this->flexform) ) {
+			$ffh       = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance('TYPO3\\CMS\\Extbase\\Service\\FlexFormService');
+			$flexArray = $ffh->convertFlexFormContentToArray($this->flexform);
+			
+			return $flexArray;
+		} else return array();
 	}
 
 }

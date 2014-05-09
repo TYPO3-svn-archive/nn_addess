@@ -37,15 +37,48 @@ class Flexform {
 	 * the Flexform file or remove the sheet of the field "flexform".
 	 *
 	 * @param array $TCA
+	 * @param string $model
 	 * @return void
 	 */
-	public static function modifyFlexSheet(&$TCA) {
+	public static function modifyFlexSheet(&$TCA, $model = 'person') {
 		$_extConfig = unserialize($GLOBALS['TYPO3_CONF_VARS']['EXT']['extConf']['nn_address']);
 		
+		// Any flexform set?
 		if ( $_extConfig['flexForm'] != '' ) {
-			$TCA['tx_nnaddress_domain_model_person']['columns']['flexform']['config']['ds']['default'] = 'FILE:'.$_extConfig['flexForm'];
+			// If a directory set, multiple models could have a flexform file
+			if ( is_dir(\TYPO3\CMS\Core\Utility\GeneralUtility::getFileAbsFileName($_extConfig['flexForm'])) ) {
+				// modify the relative path
+				$path = \TYPO3\CMS\Core\Utility\GeneralUtility::getFileAbsFileName($_extConfig['flexForm']);
+				$path = ( preg_match('/^(.*)\/$/', $path) ) ? $path : $path.'/';
+				
+				// Check if file in any combination exists
+				if ( file_exists($path.$model.'.xml') ) {
+					$file = $model.'.xml';
+				} elseif ( file_exists($path.$model.'.XML') ) {
+					$file = $model.'.XML';
+				} elseif ( file_exists($path.ucwords($model).'.xml') ) {
+					$file = ucwords($model).'.xml';
+				} elseif ( file_exists($path.ucwords($model).'.XML') ) {
+					$file = ucwords($model).'.XML';
+				} else {
+					// Remove flexforms in TCA
+					$TCA['tx_nnaddress_domain_model_'.$model]['types']['1']['showitem'] = str_replace('flexform', '', $TCA['tx_nnaddress_domain_model_'.$model]['types']['1']['showitem']);
+				}
+				
+				$TCA['tx_nnaddress_domain_model_'.$model]['columns']['flexform']['config']['ds']['default'] = 'FILE:'.$path.$file;
+			} else {
+				if ( $model !== 'person' ) {
+					// Remove flexforms in TCA
+					$TCA['tx_nnaddress_domain_model_'.$model]['types']['1']['showitem'] = str_replace('flexform', '', $TCA['tx_nnaddress_domain_model_'.$model]['types']['1']['showitem']);
+				} else {
+					// Backwards compability to extend person model
+					$TCA['tx_nnaddress_domain_model_person']['columns']['flexform']['config']['ds']['default'] = 'FILE:'.$_extConfig['flexForm'];
+				}
+			}
 		} else {
-			$TCA['tx_nnaddress_domain_model_person']['types']['1']['showitem'] = str_replace('--div--;LLL:EXT:nn_address/Resources/Private/Language/locallang_db.xlf:tx_nnaddress_domain_model_person.advanced, flexform,', '', $TCA['tx_nnaddress_domain_model_person']['types']['1']['showitem']);
+			// If nothing available remove anywhere the flexform field view
+			$TCA['tx_nnaddress_domain_model_'.$model]['types']['1']['showitem'] = str_replace('--div--;LLL:EXT:nn_address/Resources/Private/Language/locallang_db.xlf:tx_nnaddress_domain_model_'.$model.'.advanced, flexform,', '', $TCA['tx_nnaddress_domain_model_'.$model]['types']['1']['showitem']);
+			$TCA['tx_nnaddress_domain_model_'.$model]['types']['1']['showitem'] = str_replace('flexform', '', $TCA['tx_nnaddress_domain_model_'.$model]['types']['1']['showitem']);
 		}
 		
 		unset($_extConfig);

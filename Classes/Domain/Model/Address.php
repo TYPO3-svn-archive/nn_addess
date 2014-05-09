@@ -103,6 +103,13 @@ class Address extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 	 * @var \string
 	 */
 	protected $website;
+	
+	/**
+	 * flexform
+	 *
+	 * @var \string
+	 */
+	protected $flexform;
 
 	/**
 	 * Returns the type
@@ -292,6 +299,20 @@ class Address extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 	 */
 	public function setWebsite($website) {
 		$this->website = $website;
+	}
+	
+	/**
+	 * Returns the flexform
+	 *
+	 * @return \array $flexform
+	 */
+	public function getFlexform() {
+		if ( !empty($this->flexform) ) {
+			$ffh       = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance('TYPO3\\CMS\\Extbase\\Service\\FlexFormService');
+			$flexArray = $ffh->convertFlexFormContentToArray($this->flexform);
+			
+			return $flexArray;
+		} else return array();
 	}
 
 }

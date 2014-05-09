@@ -49,6 +49,13 @@ class Mail extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 	protected $email;
 	
 	/**
+	 * flexform
+	 *
+	 * @var \string
+	 */
+	protected $flexform;
+	
+	/**
 	 * Returns the type
 	 *
 	 * @return \string $type
@@ -84,6 +91,20 @@ class Mail extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 	 */
 	public function setEmail($email) {
 		$this->email = $email;
+	}
+	
+	/**
+	 * Returns the flexform
+	 *
+	 * @return \array $flexform
+	 */
+	public function getFlexform() {
+		if ( !empty($this->flexform) ) {
+			$ffh       = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance('TYPO3\\CMS\\Extbase\\Service\\FlexFormService');
+			$flexArray = $ffh->convertFlexFormContentToArray($this->flexform);
+			
+			return $flexArray;
+		} else return array();
 	}
 
 }

@@ -9,7 +9,7 @@ $TCA['tx_nnaddress_domain_model_group'] = array(
 		'showRecordFieldList' => 'sys_language_uid, l10n_parent, l10n_diffsource, hidden, title, description',
 	),
 	'types' => array(
-		'1' => array('showitem' => 'l10n_parent, l10n_diffsource, hidden;;1, title, description'),
+		'1' => array('showitem' => 'l10n_parent, l10n_diffsource, hidden;;1, title, description, flexform'),
 	),
 	'palettes' => array(
 		'1' => array('showitem' => ''),
@@ -112,7 +112,21 @@ $TCA['tx_nnaddress_domain_model_group'] = array(
 				'eval' => 'trim'
 			),
 		),
+		'flexform' => array(
+			'exclude' => 1,
+			'label' => '',
+			'config' => array(
+				'type' => 'flex',
+				'ds_pointerField' => 'uid',
+				'ds' => array(
+					'default' => ''
+				),
+			),
+		)
 	),
 );
+
+// Add Flexform if in extManager Conf is set or remove the sheet
+\NN\NnAddress\Utility\Flexform::modifyFlexSheet($TCA, 'group');
 
 ?>

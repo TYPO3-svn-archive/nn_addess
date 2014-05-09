@@ -48,6 +48,13 @@ class Phone extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 	 * @validate NotEmpty
 	 */
 	protected $number;
+	
+	/**
+	 * flexform
+	 *
+	 * @var \string
+	 */
+	protected $flexform;
 
 	/**
 	 * Returns the type
@@ -85,6 +92,20 @@ class Phone extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 	 */
 	public function setNumber($number) {
 		$this->number = $number;
+	}
+	
+	/**
+	 * Returns the flexform
+	 *
+	 * @return \array $flexform
+	 */
+	public function getFlexform() {
+		if ( !empty($this->flexform) ) {
+			$ffh       = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance('TYPO3\\CMS\\Extbase\\Service\\FlexFormService');
+			$flexArray = $ffh->convertFlexFormContentToArray($this->flexform);
+			
+			return $flexArray;
+		} else return array();
 	}
 
 }
