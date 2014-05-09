@@ -128,6 +128,7 @@ lib.nnAddressAssociated {
       parameter.data            = TSFE:id
       additionalParams.dataWrap = &tx_nnaddress_abclist[person]={field:uid}
 	  addQueryString            = 0
+	  useCacheHash              = 1
     }
   }
 }
